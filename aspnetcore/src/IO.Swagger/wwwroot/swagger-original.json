@@ -1,0 +1,143 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Sequence Bridge MS",
+    "description" : "api to receive sequence UI actions and turn them into pengine events",
+    "contact" : {
+      "email" : "pengine@vixion.nl"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/SmartBear-CC/00470509_API/1.0.0",
+    "description" : "SwaggerHub API Auto Mocking"
+  }, {
+    "url" : "https://virtserver.swaggerhub.com/PENGINE/sequence-bridge-ms/1.0.0",
+    "description" : "SwaggerHub API Auto Mocking"
+  } ],
+  "paths" : {
+    "/login" : {
+      "post" : {
+        "tags" : [ "SequenceOrders" ],
+        "summary" : "just an example how to build endpoints for this api",
+        "description" : "does nothing, just an example case",
+        "operationId" : "login",
+        "parameters" : [ {
+          "name" : "username",
+          "in" : "header",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "password",
+          "in" : "header",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "delivered ok"
+          },
+          "409" : {
+            "description" : "An Error occurred",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/investorCreated" : {
+      "post" : {
+        "tags" : [ "SequenceInvestors" ],
+        "summary" : "this endpoint should be used from sequence when a new investor gets status 'Enhance Investor Data'",
+        "description" : "receives document and process id of a new investor from sequence",
+        "operationId" : "investorCreated",
+        "parameters" : [ {
+          "name" : "documentId",
+          "in" : "header",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "processId",
+          "in" : "header",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "delivered ok"
+          },
+          "409" : {
+            "description" : "An Error occurred",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "ErrorResult" : {
+        "type" : "object",
+        "properties" : {
+          "httpStatusCode" : {
+            "type" : "integer",
+            "example" : 400
+          },
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Error"
+            }
+          }
+        },
+        "additionalProperties" : false,
+        "nullable" : true
+      },
+      "Error" : {
+        "type" : "object",
+        "properties" : {
+          "Code" : {
+            "type" : "string",
+            "example" : "TRANSLATABLE_CODE"
+          },
+          "Message" : {
+            "type" : "string",
+            "example" : "Directly usable english string for lazy people"
+          }
+        },
+        "additionalProperties" : false
+      }
+    }
+  }
+}
