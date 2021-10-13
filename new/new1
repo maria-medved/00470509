@@ -18,7 +18,7 @@
     "url" : "http://swagger.io"
   },
   "servers" : [ {
-    "url" : "https://virtserver.swaggerhub.com/mary-medved/Test_API/1.0.0",
+    "url" : "https://virtserver.swaggerhub.com/SmartBear-CC/MaryPetstore/1.0.0",
     "description" : "SwaggerHub API Auto Mocking"
   }, {
     "url" : "https://petstore.swagger.io/v2"
